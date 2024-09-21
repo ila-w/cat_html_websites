@@ -1,0 +1,126 @@
+<!-- Assignment 04 : REACT Assignment -->
+<!-- Author: Ila Wallace -->
+<!-- Date: April 10th, 2024 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Kibbus is always watching</title>
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel">
+            const { useState } = React;
+
+            function Alerter() {
+                const alertMessage = () => {
+                    alert("Don't click this button, it is not her favorite button!");
+                };
+
+                return (
+                    <div className="Alerter">
+                        <p>
+                            Did you know that Kibbus the Unholy, Finance Minister of Hell has a website.
+                            Well, you're on it right now! Plus Kibbus always knows how many times you click her favorite button. 
+                            If you click it, be prepared. She even knows the exact time without having to look at a clock, unlike silly humans.
+                            In fact, Kibbus loves educating humans about cats! There is no end to her knowlegde of cat facts.
+                        </p>
+                        <button onClick={alertMessage}>Click for more information</button>
+                    </div>
+                );
+            }
+
+            function FavoriteButton() {
+                const [count, setCount] = useState(0);
+
+                return (
+                    <aside className="column">
+                        <h2>Kibbus' Favorite Button</h2>
+                        <p>Button Click Count: {count}</p>
+                        <button onClick={() => setCount(count + 1)}>Click Me </button>
+                    </aside>
+                );
+            }
+
+            class InternalClock extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {time: new Date().toLocaleTimeString()};
+                }
+
+                updateTime() {
+                    this.setState({time: new Date().toLocaleTimeString()});
+                }
+
+                componentDidMount() {
+                    this.intervalID = setInterval(() => this.updateTime(), 1000);
+                }
+
+                componentWillMount() {
+                    clearInterval(this.intervalID);
+                }
+
+                render() {
+                    return (
+                        <aside className="column">
+                            <h2>Kibbus' Internal Clock</h2>
+                            <p>Current Time: {this.state.time}</p>
+                        </aside>
+                    );
+                }
+            }
+
+            class CatFact extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {fact: "Loading cat fact..."};
+                }
+
+                getFact() {
+                    fetch("https://catfact.ninja/fact")
+                    .then((response) => response.json())
+                    .then((data) => this.setState({fact: data.fact}));
+                }
+
+                componentDidMount() {
+                    this.getFact();
+                }
+
+                render() {
+                    return (
+                        <div className="CatFact">
+                            <h2>Kibbus' Cat Facts</h2>
+                            <p>{this.state.fact}</p>
+                            <button onClick={() => this.getFact()}>Get New Fact</button>
+                        </div>
+                    );
+                }
+            }
+
+            function App() {
+                return (
+                    <div>
+                        <Alerter/>
+                        <div style={{display: 'flex'}}>
+                            <FavoriteButton/>
+                            <InternalClock/>
+                        </div>
+                        <CatFact/>
+                    </div>
+                );
+            }
+        </script>
+        <style> .column { width: 50%; } </style>
+    </head>
+
+    <body>
+        <h1>Welcome to Kibbus' REACT Website Rick!</h1>
+        
+        <div id="root"></div>
+        <script type="text/babel">
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(<App/>);
+        </script>
+    </body>
+</html>
