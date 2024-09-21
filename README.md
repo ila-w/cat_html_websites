@@ -15,5 +15,4 @@ Changes between two cats using JavaScript inside an HTML webpage.
 
 
 ## Acknowledgements
-By Ila Wallace
-Special thanks to my cat, the client, model, and star of some of these simple websites.
+Made by Ila Wallace
