@@ -1,0 +1,38 @@
+<!-- Author: Ila Wallace -->
+<!-- Date: February 20th, 2024 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript Cats!</title>
+
+    </head>
+    <body>
+        <h1>JavaScript Cats!</h1>
+        
+        <img id ="image" src="https://icatcare.org/app/uploads/2020/10/Untitled-1-1200x600.jpg" width="50%" height="50%">
+        <p></p>
+        <button id="button" onclick="change_image()">Show Image #2</button>
+
+        <script>
+            function change_image()
+            {
+                const image1 = "https://icatcare.org/app/uploads/2020/10/Untitled-1-1200x600.jpg";
+                const image2 = "https://i.dailymail.co.uk/i/newpix/2018/07/03/16/4DE30C9F00000578-5913951-image-a-1_1530633454980.jpg";
+
+                let state = document.getElementById("image");
+               
+                if(state.src.indexOf(image1) != -1)
+                {
+                    let i2 = document.getElementById("image").src = image2;
+                    let b2 = document.getElementById("button").textContent = "Show Image #1"
+                }
+                else
+                {
+                    let i1 = document.getElementById("image").src = image1;
+                    let b1 = document.getElementById("button").textContent = "Show Image #2"
+                }
+            }
+        </script>
+    </body>
+</html>
